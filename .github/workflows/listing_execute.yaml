@@ -1,0 +1,28 @@
+name: "Execute Listing"
+
+on:
+  workflow_dispatch:
+    inputs:
+      listing:
+        type: string
+        description: 'Listing number (e.g. 2.1)'
+        required: true
+
+jobs:
+  execute-listing:
+    name: "Executing listing ${{ github.event.inputs. }}"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.17.0'
+        run: |
+          cd ch02/listing_${{ github.event.inputs. }} 
+          go mod tidy
+          ./run.sh
+          
+
