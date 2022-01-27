@@ -9,12 +9,16 @@ on:
         required: true
 
 jobs:
-  execute-listing:
+  execute:
     name: "Executing listing ${{ github.event.inputs. }}"
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+
+      - uses: actions/checkout@v2
 
       - name: Setup Go
         run: |
