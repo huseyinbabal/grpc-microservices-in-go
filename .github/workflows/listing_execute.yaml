@@ -9,8 +9,8 @@ on:
         required: true
 
 jobs:
-  execute:
-    name: "Executing listing ${{ github.event.inputs. }}"
+  execute-listing:
+    name: "Executing listing ${{ github.event.inputs.listing }}"
     runs-on: ubuntu-latest
     steps:
       - name: Install Go
