@@ -27,7 +27,7 @@ jobs:
           go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
           go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-          cd ch02/listing_${{ github.event.inputs. }} 
+          cd ch02/listing_${{ github.event.inputs.listing }} 
           go mod tidy
           ./run.sh
           
