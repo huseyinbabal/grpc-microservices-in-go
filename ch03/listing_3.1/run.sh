@@ -10,5 +10,5 @@ protoc -I ./proto \
     ./proto/order.proto
 
 echo "Generated files"
-ls -al
+ls -al golang
 
