@@ -9,3 +9,6 @@ protoc -I ./proto \
     --go-grpc_opt=paths=source_relative \
     ./proto/order.proto
 
+echo "Generated files"
+ls -al
+
