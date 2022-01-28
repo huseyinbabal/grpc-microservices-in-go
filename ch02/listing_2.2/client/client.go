@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"fmt"
 	payment "listing_2.2"
+	"log"
 
 	"google.golang.org/grpc"
 )
@@ -13,16 +13,15 @@ func main() {
 	opts = append(opts, grpc.WithInsecure())
 	conn, err := grpc.Dial("http:/localhost:8080", opts...)
 	if err != nil {
-		fmt.Println("It is fine, this is not a complete example.")
+		log.Println("It is fine, this is not a complete example.")
 	}
 
 	defer conn.Close()
 
 	paymentClient := payment.NewPaymentServiceClient(conn)
 	ctx := context.Background()
-	result, err := paymentClient.Create(ctx, &payment.CreatePaymentRequest{Price: 23})
+	_, err = paymentClient.Create(ctx, &payment.CreatePaymentRequest{Price: 23})
 	if err != nil {
-		fmt.Println("Don't worry, we don't expect to see it is working.")
+		log.Println("Don't worry, we don't expect to see it is working.")
 	}
-	fmt.Printf("Result %v", result)
 }
