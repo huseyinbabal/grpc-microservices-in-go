@@ -2,6 +2,8 @@
 
 SERVICE_NAME=order
 RELEASE_VERSION=v1.2.3
+
+echo "Generating Go source code"
 mkdir -p golang
 protoc --go_out=./golang \
   --go_opt=paths=source_relative \
