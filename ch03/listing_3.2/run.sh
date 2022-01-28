@@ -11,6 +11,9 @@ protoc --go_out=./golang \
   --go-grpc_opt=paths=source_relative \
  ./${SERVICE_NAME}/*.proto
 
+echo "Generated Go source code files"
+ls -al ./golang/${SERVICE_NAME}
+
 cd golang/${SERVICE_NAME}
 go mod init \
   github.com/huseyinbabal/grpc-microservices-in-go/ch03/listing_3.2/golang/${SERVICE_NAME} || true
