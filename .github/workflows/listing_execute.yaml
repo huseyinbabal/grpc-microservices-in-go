@@ -40,7 +40,7 @@ jobs:
 
       - name: Run
         run: |
-          cd ch02/listing_${{ github.event.inputs.listing }}
+          cd "$(find . -name listing_${{ github.event.inputs.listing }})"
           ./run.sh
           
 
