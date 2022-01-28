@@ -18,6 +18,8 @@ git config --global user.email "huseyinbabal88@gmail.com"
 git config --global user.name "Huseyin BABAL"
 git add . && git commit -am "proto update" || true
 git push -u origin HEAD
+git tag -d ch03/listing_3.2/golang/${SERVICE_NAME}/${RELEASE_VERSION}
+git push --delete origin ch03/listing_3.2/golang/${SERVICE_NAME}/${RELEASE_VERSION}
 git tag -fa ch03/listing_3.2/golang/${SERVICE_NAME}/${RELEASE_VERSION} \
   -m "ch03/listing_3.2/golang/${SERVICE_NAME}/${RELEASE_VERSION}"
 git push origin refs/tags/ch03/listing_3.2/golang/${SERVICE_NAME}/${RELEASE_VERSION}
