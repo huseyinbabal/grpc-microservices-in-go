@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package="github/huseyinbabal/microservices/order";
+option go_package="github/huseyinbabal/grpc-microservices-in-go/ch03/listing_3.2/golang/order";
 
 message CreateOrderRequest {
   int32 user_id = 1;
