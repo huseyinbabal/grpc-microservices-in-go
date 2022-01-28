@@ -2,7 +2,7 @@
 
 SERVICE_NAME=order
 RELEASE_VERSION=v1.2.3
-
+mkdir -p golang
 protoc --go_out=./golang \
   --go_opt=paths=source_relative \
   --go-grpc_out=./golang \
