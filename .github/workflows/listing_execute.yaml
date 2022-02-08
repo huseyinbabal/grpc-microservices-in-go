@@ -1,8 +1,8 @@
 name: "Execute Listing"
 
 env:
-  GITHUB_USERNAME: ${{ github.event.schedule.user.login }}
-  GITHUB_EMAIL: "${{ github.event.schedule.user.login }}@users.noreply.github.com"
+  GITHUB_USERNAME: ${{ github.actor }}
+  GITHUB_EMAIL: "${{ github.actor }}@users.noreply.github.com"
 
 on:
   workflow_dispatch:
