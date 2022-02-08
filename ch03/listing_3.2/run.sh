@@ -16,11 +16,11 @@ ls -al ./golang/${SERVICE_NAME}
 
 cd golang/${SERVICE_NAME}
 go mod init \
-  github.com/huseyinbabal/grpc-microservices-in-go/ch03/listing_3.2/golang/${SERVICE_NAME} || true
+  github.com/${GITHUB_USERNAME}/grpc-microservices-in-go/ch03/listing_3.2/golang/${SERVICE_NAME} || true
 go mod tidy || true
 cd ../../
-git config --global user.email "huseyinbabal88@gmail.com"
-git config --global user.name "Huseyin BABAL"
+git config --global user.email ${GITHUB_EMAIL}
+git config --global user.name ${GITHUB_USERNAME}
 git add . && git commit -am "proto update" || true
 git push -u origin HEAD
 git tag -d ch03/listing_3.2/golang/${SERVICE_NAME}/${RELEASE_VERSION}

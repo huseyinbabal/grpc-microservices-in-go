@@ -1,5 +1,9 @@
 name: "Execute Listing"
 
+env:
+  GITHUB_USERNAME: ${{ github.event.schedule.user.login }}
+  GITHUB_EMAIL: "${{ github.event.schedule.user.login }}@users.noreply.github.com"
+
 on:
   workflow_dispatch:
     inputs:
@@ -41,6 +45,6 @@ jobs:
       - name: Run
         run: |
           cd "$(find . -name listing_${{ github.event.inputs.listing }})"
-          ./run.sh
+          GITHUB_USERNAME=${{ env.GITHUB_USERNAME }} GITHUB_EMAIL=${{ env.GITHUB_EMAIL }} ./run.sh
           
 
