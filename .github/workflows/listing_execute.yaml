@@ -45,6 +45,6 @@ jobs:
       - name: Run
         run: |
           cd "$(find . -name listing_${{ github.event.inputs.listing }})"
-          GITHUB_USERNAME=${{ env.GITHUB_USERNAME }} GITHUB_EMAIL=${{ env.GITHUB_EMAIL }} ./run.sh
+          ./run.sh ${{ env.GITHUB_USERNAME }} ${{ env.GITHUB_EMAIL }} 
           
 
