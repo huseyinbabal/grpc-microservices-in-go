@@ -1,0 +1,15 @@
+syntax = "proto3";
+option go_package="github/huseyinbabal/microservices/product";
+
+message GetProductRequest {
+  int32 product_id = 1;
+}
+
+
+message GetProductResponse {
+  string title = 1;
+}
+
+service ProductService {
+  rpc Get(GetProductRequest) returns (GetProductResponse){}
+}
