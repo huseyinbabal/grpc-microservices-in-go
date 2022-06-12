@@ -19,11 +19,11 @@ go mod tidy
 
 echo "####START####"
 
-echo "Running client..."
-nohup go run client/client.go &
-
 echo "Running server..."
-go run server/server.go
+nohup go run server/server.go &
+
+echo "Running client..."
+go run client/client.go
 echo "####END####"
 
 
