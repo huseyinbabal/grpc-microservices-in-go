@@ -7,6 +7,7 @@ import (
 	shipping "listing_6.1"
 	"log"
 	"net"
+	"time"
 )
 
 type server struct {
@@ -14,7 +15,8 @@ type server struct {
 }
 
 func (s *server) Create(ctx context.Context, in *shipping.CreateShippingRequest) (*shipping.CreateShippingResponse, error) {
-	return &shipping.CreateShippingResponse{ShippingId: 121}, nil
+	time.Sleep(2 * time.Second) // simulated delay
+	return &shipping.CreateShippingResponse{ShippingId: 1243}, nil
 }
 
 func main() {

@@ -1,6 +1,5 @@
 #!/bin/bash
-
-#sudo apt-get install -y protobuf-compiler golang-goprotobuf-dev
+sudo apt-get install -y protobuf-compiler golang-goprotobuf-dev
 
 echo "Installing protoc go and grpc modules..."
 
@@ -22,9 +21,6 @@ echo "####START####"
 
 echo "Running client..."
 nohup go run client/client.go &
-
-echo "Wait for 5 seconds and run service."
-sleep 30
 
 echo "Running server..."
 go run server/server.go
