@@ -1,0 +1,17 @@
+syntax = "proto3";
+option go_package="github/huseyinbabal/microservices/order";
+
+message CreateOrderRequest {
+  int32 user_id = 1;
+  int32 product_id = 2;
+  float price = 3;
+}
+
+
+message CreateOrderResponse {
+  int32 order_id = 1;
+}
+
+service OrderService {
+  rpc Create(CreateOrderRequest) returns (CreateOrderResponse){}
+}
