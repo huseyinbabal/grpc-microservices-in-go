@@ -1,3 +1,5 @@
 .idea
 **/nohup.out
 **/cert
+**/*.pb.go
+**/*_grpc.pb.go
