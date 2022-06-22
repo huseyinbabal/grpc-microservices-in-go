@@ -1,5 +1,5 @@
 #!/bin/bash
-#sudo apt-get install -y protobuf-compiler golang-goprotobuf-dev
+sudo apt-get install -y protobuf-compiler golang-goprotobuf-dev
 
 echo "Installing protoc go and grpc modules..."
 
