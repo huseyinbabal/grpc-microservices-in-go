@@ -3,4 +3,4 @@
 **/cert
 **/*.pb.go
 **/*_grpc.pb.go
-.DS_Store
+**/.DS_Store
