@@ -27,6 +27,7 @@ sleep 5
 
 echo "Running client..."
 go run client/client.go
+killall server
 echo "####END####"
 
 
