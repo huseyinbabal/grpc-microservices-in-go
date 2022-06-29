@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"errors"
 	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -18,31 +19,27 @@ type server struct {
 }
 
 func getTlsCredentials() (credentials.TransportCredentials, error) {
-	cert, err := tls.LoadX509KeyPair("cert/server.crt", "cert/server.key")
-	if err != nil {
-		return nil, fmt.Errorf("could not server key pairs: %s", err)
+	serverCert, serverCertErr := tls.LoadX509KeyPair("cert/server.crt", "cert/server.key")
+	if serverCertErr != nil {
+		return nil, fmt.Errorf("could not load server key pairs: %s", serverCertErr)
 	}
 
-	// Create certpool from the CA
 	certPool := x509.NewCertPool()
-	ca, err := ioutil.ReadFile("cert/ca.crt")
-	if err != nil {
-		return nil, fmt.Errorf("could not read CA cert: %s", err)
+	caCert, caCertErr := ioutil.ReadFile("cert/ca.crt")
+	if caCertErr != nil {
+		return nil, fmt.Errorf("could not read CA cert: %s", caCertErr)
 	}
 
-	// Append the certs from the CA
-	if ok := certPool.AppendCertsFromPEM(ca); !ok {
-		return nil, fmt.Errorf("Failed to append the CA certs: %s", err)
+	if ok := certPool.AppendCertsFromPEM(caCert); !ok {
+		return nil, errors.New("failed to append the CA certs")
 	}
 
-	// Create the TLS config for gRPC server.
-	creds := credentials.NewTLS(
+	return credentials.NewTLS(
 		&tls.Config{
 			ClientAuth:   tls.RequireAnyClientCert,
-			Certificates: []tls.Certificate{cert},
+			Certificates: []tls.Certificate{serverCert},
 			ClientCAs:    certPool,
-		})
-	return creds, nil
+		}), nil
 }
 
 func (s *server) Create(ctx context.Context, in *order.CreateOrderRequest) (*order.CreateOrderResponse, error) {

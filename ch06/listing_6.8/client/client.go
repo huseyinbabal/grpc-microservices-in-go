@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"crypto/x509"
+	"errors"
 	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -13,31 +14,26 @@ import (
 )
 
 func getTlsCredentials() (credentials.TransportCredentials, error) {
-	// Load certs from the d
-	cert, err := tls.LoadX509KeyPair("cert/client.crt", "cert/client.key")
-	if err != nil {
-		return nil, fmt.Errorf("Could not load client key pair : %v", err)
+	clientCert, clientCertErr := tls.LoadX509KeyPair("cert/client.crt", "cert/client.key")
+	if clientCertErr != nil {
+		return nil, fmt.Errorf("could not load client key pair : %v", clientCertErr)
 	}
 
-	// Create certpool from the CA
 	certPool := x509.NewCertPool()
-	ca, err := ioutil.ReadFile("cert/ca.crt")
-	if err != nil {
-		return nil, fmt.Errorf("Could not read Cert CA : %v", err)
+	caCert, caCertErr := ioutil.ReadFile("cert/ca.crt")
+	if caCertErr != nil {
+		return nil, fmt.Errorf("could not read Cert CA : %v", caCertErr)
 	}
 
-	// Append the certs from the CA
-	if ok := certPool.AppendCertsFromPEM(ca); !ok {
-		return nil, fmt.Errorf("Failed to append CA cert : %v", err)
+	if ok := certPool.AppendCertsFromPEM(caCert); !ok {
+		return nil, errors.New("failed to append CA cert.")
 	}
 
-	// Create transport creds based on TLS.
-	creds := credentials.NewTLS(&tls.Config{
+	return credentials.NewTLS(&tls.Config{
 		ServerName:   "*.microservices.dev",
-		Certificates: []tls.Certificate{cert},
+		Certificates: []tls.Certificate{clientCert},
 		RootCAs:      certPool,
-	})
-	return creds, nil
+	}), nil
 }
 
 func main() {
